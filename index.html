@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -27,6 +28,11 @@
             font-size: 18px;
             color: #777;
         }
+        #countdown {
+            margin-top: 20px;
+            font-size: 30px;
+            color: #ff0000;
+        }
     </style>
 </head>
 <body>
@@ -34,5 +40,37 @@
         Nếu bạn thấy dòng chữ này, xin thông báo web đang hoạt động bình thường.
         <div class="coming-soon">Coming Soon</div>
     </div>
+    <div id="countdown"></div>
+
+    <script>
+        // Đặt ngày đích cần đếm ngược
+        var countDownDate = new Date("Sep 18, 2024 00:00:00 GMT+0700").getTime();
+
+        // Cập nhật đếm ngược mỗi giây
+        var x = setInterval(function() {
+
+            // Lấy thời gian hiện tại
+            var now = new Date().getTime();
+
+            // Tìm khoảng thời gian giữa bây giờ và thời gian đích
+            var distance = countDownDate - now;
+
+            // Tính toán ngày, giờ, phút và giây
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Hiển thị kết quả
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+            // Nếu đếm ngược xong, hiển thị một thông báo
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "Hết giờ!";
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
